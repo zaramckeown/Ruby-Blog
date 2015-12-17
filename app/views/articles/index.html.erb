@@ -1,0 +1,51 @@
+<div class="container">
+	<div class="col-md-8">
+		<div class="page-header">
+			<h1>Listing articles</h1>
+		</div>
+		
+		<% @articles.each do |article| %>
+			<div class="row" style="margin-bottom: 30px;">
+				<div class="col-xs-1" >
+					<span class="glyphicon glyphicon-thumbs-up"></span>
+					<input type="text" value="3" size="2" readonly>
+					<span class="glyphicon glyphicon-thumbs-down"></span>
+				</div>
+				
+				<div class="col-xs-11">
+					<p><span class="glyphicon glyphicon-time"></span> Published at: <%= article.created_at %>
+					</p>
+
+					<a style="font-size: 25px;">
+						<%= article.title %>
+					</a>
+
+					</br>
+						<%= article.body %>
+						<br>
+						<br>
+						<%= link_to article, class: "btn btn-primary" do %>
+		   					 <span class="glyphicon glyphicon-chevron-right"></span> Read More
+						<% end %>
+				</div>
+			</div>
+			
+		<% end %>
+	
+	</div>
+
+	<div class="col-md-4">
+	    <!-- Blog Search Well -->
+	    <div class="well">
+	        <h4>Blog Search</h4>
+	        <div class="input-group">
+	            <input type="text" class="form-control">
+	            <span class="input-group-btn">
+	                <button class="btn btn-default" type="button">
+	                    <span class="glyphicon glyphicon-search"></span>
+	            </button>
+	            </span>
+	        </div>
+    </div>
+
+</div>

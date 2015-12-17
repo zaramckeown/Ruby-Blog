@@ -1,0 +1,33 @@
+<section class "row">
+
+  <div class="col-xs-offset-0 col-xs-10 col-ms-offset-4 col-md-4 login-form-bg">
+  <%= bootstrap_form_for(@user) do |f| %>
+    <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %>
+  prohibited this user from being saved:</h2>
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+    <% end %>
+    <div class="field">
+      <%= f.label :email %><br />
+      <%= f.text_field :email, hide_label: true, placeholder: "Email" %>
+    </div>
+    <div class="field">
+      <%= f.label :password %><br />
+      <%= f.password_field :password, hide_label: true, placeholder: "Password"%>
+    </div>
+    <div class="field">
+      <%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation, hide_label: true, placeholder: "Confirm Password" %>
+    </div>
+    <div class="actions">
+      <%= submit_or_cancel(f) %>
+    </div>
+  <% end %>
+  </div>
+</section>

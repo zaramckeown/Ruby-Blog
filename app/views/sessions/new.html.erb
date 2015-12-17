@@ -1,0 +1,21 @@
+<section class "row">
+
+  <div class="col-xs-offset-0 col-xs-10 col-ms-offset-4 col-md-4 login-form-bg">
+    <h1>Login</h1>
+    <%= bootstrap_form_tag url: session_path do |f| %>
+      <div class="field">
+        <%= f.label :email %><br />
+        <%= f.text_field :email, hide_label: true, placeholder: "Email" %>
+      </div>
+      <div class="field">
+        <%= f.label :password %><br />
+        <%= f.password_field :password, hide_label: true, placeholder: "Password"%>
+      </div>
+      <br>
+      <div class="actions">
+        <%= f.submit "Log In", class: "btn btn-default"%>
+      </div>
+    <% end %>
+  </div>
+
+</section>
