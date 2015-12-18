@@ -1,17 +1,22 @@
-<%= form_for([@article, @article.comments.new]) do |f| %>
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
+<section class "row">
+  <div class="col-xs-offset-0 col-xs-10 col-ms-offset-4 col-md-4 login-form-bg">
+    <br>
+    <%= bootstrap_form_for([@article, @article.comments.new]) do |f| %>
+      <div class="field">
+        <%= f.label :name %><br />
+        <%= f.text_field :name,  hide_label: true, placeholder: "Name" %>
+      </div>
+      <div class="field">
+        <%= f.label :email %><br />
+        <%= f.text_field :email,  hide_label: true, placeholder: "Email" %>
+      </div>
+      <div class="field">
+        <%= f.label :body %><br />
+        <%= f.text_area :body,  hide_label: true, placeholder: "Comment"%>
+      </div>
+      <div class="actions">
+        <%= f.submit 'Add' %>
+      </div>
+    <% end %>
   </div>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :body %><br />
-    <%= f.text_area :body %>
-  </div>
-  <div class="actions">
-    <%= f.submit 'Add' %>
-  </div>
-<% end %>
+</section>
