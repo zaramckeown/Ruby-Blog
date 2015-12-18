@@ -3,8 +3,16 @@
 
 	<h3>Comments</h3>
 	<div id="comments" class="row">
-	  <%= render @article.comments %>
+	  <%= render @commentsShow %>
+
 	</div>
+
+	<div class="flickr_pagination">
+	    <div class="page_info">
+	     	 <%= page_entries_info @commentsShow %>
+	    </div>
+	    <%= will_paginate @commentsShow, :container => false %>
+	</div>	
 
 	<br>
 	<h3> Add a Comment </h3>
