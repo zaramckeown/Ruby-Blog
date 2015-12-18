@@ -16,15 +16,15 @@
 					<p><span class="glyphicon glyphicon-time"></span> Published at: <%= article.created_at %>
 					</p>
 
-					<a style="font-size: 25px;">
+					<p style="font-size: 25px; color: cornflowerblue; ">
 						<%= article.title %>
-					</a>
+					</p>
 
 					</br>
 						<%= article.body %>
 						<br>
 						<br>
-						<%= link_to article, class: "btn btn-primary" do %>
+						<%= link_to article, class: "btn btn-default" do %>
 		   					 <span class="glyphicon glyphicon-chevron-right"></span> Read More
 						<% end %>
 				</div>

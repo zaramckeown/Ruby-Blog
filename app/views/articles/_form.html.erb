@@ -1,4 +1,4 @@
-<%= form_for(@article) do |f| %>
+<%= bootstrap_form_for(@article) do |f| %>
   <% if @article.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@article.errors.count, "error") %> prohibited this article from being saved:</h2>
@@ -13,11 +13,11 @@
 
   <div class="field">
     <%= f.label :title %><br>
-    <%= f.text_field :title %>
+    <%= f.text_field :title, hide_label: true, placeholder: "Title"%>
   </div>
   <div class="field">
     <%= f.label :location %><br>
-    <%= f.text_field :location %>
+    <%= f.text_field :location, hide_label: true, placeholder: "Location" %>
   </div>
   <div class="field">
     <%= f.label "Categories" %><br />
@@ -29,15 +29,15 @@
     </div>
   <div class="field">
     <%= f.label :excerpt %><br>
-    <%= f.text_field :excerpt %>
+    <%= f.text_field :excerpt, hide_label: true, placeholder: "Excerpt"%>
   </div>
   <div class="field">
     <%= f.label :body %><br>
-    <%= f.text_area :body %>
+    <%= f.text_area :body, hide_label: true, placeholder: "Body"%>
   </div>
   <div class="field">
     <%= f.label :published_at %><br>
-    <%= f.datetime_select :published_at %>
+    <%= f.datetime_select :published_at, hide_label: true, placeholder: "Published At" %>
   </div>
   <div class="actions">
     <%= submit_or_cancel(f) %>

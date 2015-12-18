@@ -1,10 +1,14 @@
 <%= div_for article do %>
   <h3>
-    <%= link_to article.title, article %>
+    <p style="font-size: 25px; color: cornflowerblue;">
+      <%= article.title %>
+    </p>
     <% if article.owned_by? current_user %>
       <span class='actions'>
-        <%= link_to "Edit", edit_article_path(article) %>
-        <%= link_to "Delete", article, confirm: "Are you sure?", method: :delete %>
+        <%= link_to "Edit", edit_article_path(article), class: 'btn btn-mini btn-info' %>
+
+        <%= link_to 'Delete', article, method: :delete, confirm: 'Are you sure?', class: 'btn btn-mini btn-danger' %>
+
       </span>
     <% end %>
   </h3>
