@@ -1,0 +1,41 @@
+<%= javascript_tag do %>
+  var bla = document.getElementById('profile_backgroundColor').value 
+  document.body.style.backgroundColor = bla;
+<% end %>
+
+
+<div class="row">
+    <div class="col-md-3 col-sm-3">
+                          
+        <div class="user-wrapper">
+        <div class="description">
+           <h4> <%= @profile.name %> - Profile</h4>
+            <p>
+                Brithday: <%= @profile.birthday %>  
+            </p>
+        </div>
+         </div>
+    </div>
+    
+    <div class="col-md-9 col-sm-9  user-wrapper">
+        <div class="description">
+             <h3> <%= @profile.name %> Biography : </h3>
+        <hr />
+         <p>
+              <%= @profile.bio %> 
+         </p>
+
+        <h3> Social Links: </h3>
+        <hr />     
+        <% if @profile.twitter.to_s != '' %>      
+            <%= link_to @url, class: "btn btn-default" do %>
+		   					 <span class="glyphicon glyphicon-chevron-right"></span> Read More
+			<% end %>
+		<% end %>
+        </div>
+    </div>
+
+    <%= form_for @profile do |f| %>
+	  <%= f.hidden_field :backgroundColor, :value => @profile.colour %>
+	<% end %>
+</div>

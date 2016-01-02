@@ -29,7 +29,6 @@ class ArticlesController < ApplicationController
   # POST /articles.json
   def create
     @article = current_user.articles.new(article_params)
-
     respond_to do |format|
       if @article.save
         format.html { redirect_to @article, notice: 'Article was successfully created.' }
@@ -64,6 +63,37 @@ class ArticlesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to articles_url }
       format.json { head :no_content }
+    end
+  end
+
+
+  def upvote()
+    @article = Article.find(params[:id])
+    respond_to do |format|
+    if @article.sum != nil  
+      @article.sum = @article.sum + params[:upvote].to_i
+    else
+      @article.sum = params[:upvote].to_i
+    end
+      if @article.update(:sum => @article.sum)
+        format.html { redirect_to root_path, notice: 'Thank you for you upvote.' }
+        format.json { head :no_content }
+      end
+    end
+  end
+
+  def downvote()
+     @article = Article.find(params[:id])
+     respond_to do |format|
+      if @article.sum != nil  
+        @article.sum = @article.sum + params[:downvote].to_i
+      else
+        @article.sum = params[:downvote].to_i
+      end
+      if @article.update(:sum =>  @article.sum)
+        format.html { redirect_to root_path, notice: 'Thank you for you downvote.' }
+        format.json { head :no_content }
+      end
     end
   end
 

@@ -5,9 +5,12 @@ class CommentsController < ApplicationController
   def create
     @comment = @article.comments.new(comment_params)
     if @comment.save
-      redirect_to @article, notice: 'Thanks for your comment'
+      respond_to do |format|
+        format.html {redirect_to @article, notice: 'Thanks for your comment'}
+        render.js 
+      end
     else
-      redirect_to @article, alert: 'Unable to add comment'
+      redirect_to @article, notice: 'Failed to post comment'
     end
   end
 

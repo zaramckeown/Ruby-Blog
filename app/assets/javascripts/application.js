@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.minicolors
 //= require twitter/bootstrap
 //= require turbolinks
 //= require bootstrap-sprockets

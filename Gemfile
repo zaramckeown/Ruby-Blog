@@ -17,6 +17,8 @@ gem 'coffee-rails', '~> 4.0.0'
 # gem 'therubyracer',  platforms: :ruby
 gem 'bootstrap-sass'
 
+gem 'jquery-minicolors-rails'
+
 gem 'twitter-bootstrap-rails'
 
 gem 'bootstrap_form'

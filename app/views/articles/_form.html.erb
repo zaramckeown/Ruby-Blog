@@ -19,6 +19,7 @@
     <%= f.label :location %><br>
     <%= f.text_field :location, hide_label: true, placeholder: "Location" %>
   </div>
+  
   <div class="field">
     <%= f.label "Categories" %><br />
     <% Category.all.each do |category| %>

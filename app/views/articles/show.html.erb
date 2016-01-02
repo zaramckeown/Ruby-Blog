@@ -1,10 +1,15 @@
 <%= render @article %>
-<div class="container">
 
-	<h3>Comments</h3>
-	<div id="comments" class="row">
-	  <%= render @commentsShow %>
+<div id="details">
+	Published on <%= @article.created_at %> by <%= @article.user.try(:email) %> 
+</div>
 
+<h3>  <%= link_to "Comments", "#", id: "comments-link" %> <small style="color:black; font-size: small;"> (<%= @article.comments.count %>  <% if @article.comments.count > 1  or @article.comments.count == 0%> Comments<% else %> Comment<% end %>)</small> </h3>
+
+<section id="commentsection"> 
+
+	<div class="row">
+	  	<%= render @commentsShow %>
 	</div>
 
 	<div class="flickr_pagination">
@@ -17,4 +22,4 @@
 	<br>
 	<h3> Add a Comment </h3>
 	<%= render :file => 'comments/new' %>
-</div>
+</section>

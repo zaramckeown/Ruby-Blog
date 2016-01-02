@@ -13,6 +13,9 @@ class UsersController < ApplicationController
     else
       render action: :new
     end
+
+    profile = Profile.new()
+    @user.profile = profile
   end
 
   def edit

@@ -1,41 +1,107 @@
 <div class="container">
 	<div class="col-md-8">
 		<div class="page-header">
-			<h1>Listing articles</h1>
+			<div class="row">
+				
+				<div class="col-sm-9"><h1>Articles</h1></div>
+				<div class="col-sm-3">
+					<%= link_to new_article_path, class: "btn btn-default" do %>
+	   					<span class="glyphicon glyphicon-chevron-right"></span> New Article
+					<% end %>
+				</div>
+				
+			</div>
 		</div>
 		
 		<% @articles.each do |article| %>
 			<div class="row" style="margin-bottom: 30px;">
 				<div class="col-xs-1" >
-					<span class="glyphicon glyphicon-thumbs-up"></span>
-					<input type="text" value="3" size="2" readonly>
-					<span class="glyphicon glyphicon-thumbs-down"></span>
+   					<%= form_tag upvote_article_path(article), :method => 'PUT' do %>
+					  <div class="input-group">
+					  	<%= hidden_field_tag :upvote, 1 %>
+					  	<span class="input-group-btn">
+					    	 <%= button_tag(type: "submit", class: "btn btn-default") do %>
+		   						<span class="glyphicon glyphicon-thumbs-up"></span>
+							<% end %>
+					     </span>
+					</div>
+		   	 		<% end %>
+
+		   	 		
+					<%= form_for article do |f| %>
+						 <% if article.sum != nil %> 
+							<%= f.text_field :sum, readonly:true, size:1%>
+						 <% else %>
+						 	<%= f.text_field :sum, readonly:true, size:1,  :value => '0'%>
+						<% end %>
+					<% end %>
+				
+
+					<%= form_tag downvote_article_path(article), :method => 'PUT' do %>
+						  <div class="input-group">
+						  	<%= hidden_field_tag :downvote, -1 %>
+						  	<span class="input-group-btn">
+						    	 <%= button_tag(type: "submit", class: "btn btn-default") do %>
+			   						<span class="glyphicon glyphicon-thumbs-down"></span>
+								<% end %>
+						     </span>
+						</div>
+			   	 		<% end %>
 				</div>
 				
 				<div class="col-xs-11">
 					<p><span class="glyphicon glyphicon-time"></span> Published at: <%= article.created_at %>
 					</p>
 
-					<p><span class="glyphicon glyphicon-time"></span> Posted By: <%= article.user.try(:email) %>
+					<p><span class="glyphicon glyphicon-time"></span> Posted By:  <%= link_to article.user.try(:email), article.user.try(:profile)%>
 					</p>
+
+					<% if article.categories.count > 0 %>
+
+						<p><span class="glyphicon glyphicon-time"></span> Categorys:
+
+					<% end %>
 
 			   		<% article.categories.each do |category| %>
 
-						<p><span class="glyphicon glyphicon-time"></span> Category: <%= category.try(:name) %>
-						</p>
+						 <%= link_to category.name, category %>,
 			   		<% end %>
+
+			   		</p> 
 
      				<p style="font-size: 25px; color: cornflowerblue; ">
 						<%= article.title %> <small style="color:black; font-size: small;">(<%= article.comments.count %>  <% if article.comments.count > 1  or article.comments.count == 0%> Comments <% else %> Comment <% end %>)</small>
 					</p>
 
 					</br>
-						<%= article.body %>
-						<br>
-						<br>
-						<%= link_to article, class: "btn btn-default" do %>
-		   					 <span class="glyphicon glyphicon-chevron-right"></span> Read More
+					<%= article.body %>
+					<br>
+					<br>
+
+					<%= link_to article, class: "btn btn-default" do %>
+	   					 <span class="glyphicon glyphicon-chevron-right"></span> Read More
+					<% end %>
+
+					<% if article.comments.count > 1 %> 
+						<%= link_to "#", id: "comments-link", class: "btn btn-default" do %>
+		   					 <span class="glyphicon glyphicon-chevron-right"></span> Top Comments
 						<% end %>
+					<% end %>
+
+					<section id="comments-section"> 
+
+						<div class="row">
+							<ol id="comments">
+								<% article.comments.first(3).each do |comment| %>
+									<br>
+									<strong><%= comment.name %></strong>
+									<blockquote>
+								  		<p><%= comment.body %></p>
+								  	</blockquote>
+								<% end %>
+						  	</ol> 
+						</div>
+					</section>
 				</div>
 			</div>
 			
@@ -61,20 +127,24 @@
    						<span class="glyphicon glyphicon-search"></span>
 					<% end %>
 			     </span>
-			  </div>
-			<% end %>
-    </div>
+			</div>
+			    <% end %>
+    	</div>
 
-	<!-- Blog Categories -->
-    <div class="well">
-        <h4>Blog Categories</h4>
-        <div class="row">
-            <div class="col-lg-6">
-                <% @categories.each do |categories| %> 
-			    	<br>
-					<%= link_to categories.name, new_article_path %>
-			   	<% end %>
-            </div>
-        </div>
-    </div>
+		<!-- Blog Categories -->
+	    <div class="well">
+	        <div class="col-sm-6"><h4>Categories</h4></div>
+	        <div class="col-sm-6"><%= link_to new_category_path, class: "btn btn-default" do %>
+	   			<span class="glyphicon glyphicon-chevron-right"></span> New Category
+			<% end %></div>
+	        <div class="row">
+	            <div class="col-xs-11 col-xs-offset-1">
+	                <% @categories.first(3).each do |categories| %> 
+				    	<br>
+						<%= link_to categories.name, categories %>
+				   	<% end %>
+	            </div>
+	        </div>
+	    </div>
+	</div>
 </div>

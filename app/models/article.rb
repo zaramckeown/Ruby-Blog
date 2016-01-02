@@ -9,9 +9,6 @@ class Article < ActiveRecord::Base
   scope :draft, lambda { where("articles.published_at IS NULL") }
   scope :recent, lambda { published.where("articles.published_at > ?", 1.week.ago.to_date) }
   scope :where_title, lambda { |term| where("articles.title LIKE ?", "%#{term}%") }
-
-  #SELECT "articles".* FROM "articles" INNER JOIN "articles_categories" ON "articles"."id" = "articles_categories"."article_id" WHERE "articles_categories"."category_id" = ?  [["category_id", 2]]
-
   
   def long_title
     "#{title} - #{published_at}"

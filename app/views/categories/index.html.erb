@@ -1,0 +1,38 @@
+<div class="container">
+	
+		<div class="page-header">
+			<div class="row">
+				
+				<div class="col-sm-9"><h1>Categories</h1></div>
+				<div class="col-sm-3">
+					<%= link_to new_category_path, class: "btn btn-default" do %>
+	   					<span class="glyphicon glyphicon-chevron-right"></span> New Category
+					<% end %>
+				</div>
+				
+			</div>
+		</div>
+
+		<div class="col-xs-3">
+			<%= form_tag categories_path, :method => 'get' do %>
+			<div class="input-group">
+				<%= text_field_tag :search, params[:search], placeholder: "", :class => "form-control" %>
+				<span class="input-group-btn">
+				 <%= button_tag(type: "submit", class: "btn btn-default") do %>
+						<span class="glyphicon glyphicon-search"></span>
+				<% end %>
+			 	</span>
+			 	<% end %>
+			</div>
+		</div>
+
+		<br>
+		<br>
+		<br>
+
+		<% @categories.each do |category| %>
+			<div class="well col-sm-3" style="margin-bottom: 30px;">
+				<%= link_to category.name, category %>
+			</div>
+		<% end %>
+</div>

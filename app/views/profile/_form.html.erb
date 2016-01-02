@@ -1,0 +1,70 @@
+<%= javascript_tag do %>
+  $.minicolors = {
+    defaults: {
+        animationSpeed: 50,
+        animationEasing: 'swing',
+        change: null,
+        changeDelay: 0,
+        control: 'hue',
+        dataUris: true,
+        defaultValue: '',
+        format: 'hex',
+        hide: null,
+        hideSpeed: 100,
+        inline: false,
+        keywords: '',
+        letterCase: 'lowercase',
+        opacity: false,
+        position: 'bottom left',
+        show: null,
+        showSpeed: 100,
+        theme: 'bootstrap'
+    }
+  };
+  $("input[id=profile_colour]").minicolors();
+
+  var bla = document.getElementById('profile_colour').value 
+  document.body.style.backgroundColor = bla;
+<% end %>
+
+<section class "row">
+
+  <div class="col-xs-offset-0 col-xs-10 col-ms-offset-4 col-md-4 login-form-bg">
+  <%= bootstrap_form_for(@profile) do |f| %>
+    <% if @profile.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@profile.errors.count, "error") %>
+  prohibited this user from being saved:</h2>
+      <ul>
+      <% @profile.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+    <% end %>
+    <div class="field">
+      <%= f.label :name %><br />
+      <%= f.text_field :name, hide_label: true, placeholder: "Name" %>
+    </div>
+    <div class="field">
+      <%= f.label :birthday %><br />
+      <%= f.date_select :birthday, hide_label: true, placeholder: "birthday" %>
+    </div>
+    <div class="field">
+      <%= f.label :bio %><br />
+      <%= f.text_area :bio, hide_label: true, placeholder: "bio" %>
+    </div>
+    <div class="field">
+      <%= f.label :colour %><br />
+      <%= f.text_field :colour, hide_label: true, placeholder: "colour" %>
+    </div>
+    <div class="field">
+      <%= f.label :twitter %><br />
+      <%= f.text_field :twitter, hide_label: true, placeholder: "twitter" %>
+    </div>
+    <div class="actions">
+      <%= submit_or_cancel(f) %>
+    </div>
+  <% end %>
+  </div>
+</section>
